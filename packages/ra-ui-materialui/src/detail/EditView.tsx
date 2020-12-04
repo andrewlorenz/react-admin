@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Children, cloneElement } from 'react';
+import { Children, cloneElement, ReactElement } from 'react';
 import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -114,6 +114,12 @@ export const EditView = (props: EditViewProps) => {
     );
 };
 
+interface EditViewProps
+    extends EditProps,
+        Omit<EditControllerProps, 'resource'> {
+    children: ReactElement;
+}
+
 EditView.propTypes = {
     actions: PropTypes.element,
     aside: PropTypes.element,
@@ -172,8 +178,8 @@ const sanitizeRestProps = ({
     loading = null,
     location = null,
     match = null,
-    onFailure = null,
-    onSuccess = null,
+    onFailureRef = null,
+    onSuccessRef = null,
     options = null,
     permissions = null,
     save = null,
@@ -182,6 +188,6 @@ const sanitizeRestProps = ({
     setOnSuccess = null,
     setTransform = null,
     successMessage = null,
-    transform = null,
+    transformRef = null,
     ...rest
 }) => rest;

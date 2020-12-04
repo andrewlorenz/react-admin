@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Children, cloneElement } from 'react';
+import { Children, cloneElement, ReactElement } from 'react';
 import PropTypes from 'prop-types';
 import { CreateControllerProps, useCreateContext } from 'ra-core';
 import { Card } from '@material-ui/core';
@@ -87,7 +87,9 @@ export const CreateView = (props: CreateViewProps) => {
 
 interface CreateViewProps
     extends CreateProps,
-        Omit<CreateControllerProps, 'resource'> {}
+        Omit<CreateControllerProps, 'resource'> {
+    children: ReactElement;
+}
 
 CreateView.propTypes = {
     actions: PropTypes.element,
@@ -146,8 +148,8 @@ const sanitizeRestProps = ({
     loading = null,
     location = null,
     match = null,
-    onFailure = null,
-    onSuccess = null,
+    onFailureRef = null,
+    onSuccessRef = null,
     options = null,
     permissions = null,
     save = null,
@@ -155,6 +157,6 @@ const sanitizeRestProps = ({
     setOnFailure = null,
     setOnSuccess = null,
     setTransform = null,
-    transform = null,
+    transformRef = null,
     ...rest
 }) => rest;
